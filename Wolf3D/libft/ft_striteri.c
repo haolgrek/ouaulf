@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/11/28 20:50:05 by rluder            #+#    #+#             */
+/*   Updated: 2015/12/02 16:54:22 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	t_m	m;
+	unsigned int	i;
 
-	if (argc != 2)
+	i = 0;
+	while (*s != '\0' && f)
 	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
+		f(i, s++);
+		i++;
 	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
-	else
-		ft_putendl("Map is shitty");
-	return (0);
 }

@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/12/02 11:25:48 by rluder            #+#    #+#             */
+/*   Updated: 2015/12/04 17:51:22 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
+#include <unistd.h>
 
-int	main(int argc, char **argv)
+void	ft_putnbr(int n)
 {
-	t_m	m;
-
-	if (argc != 2)
-	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
-	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
+	if (n == -2147483648)
+		ft_putstr("-2147483648");
 	else
-		ft_putendl("Map is shitty");
-	return (0);
+	{
+		if (n < 0)
+		{
+			n = -n;
+			ft_putchar('-');
+		}
+		if (n >= 10)
+			ft_putnbr(n / 10);
+		ft_putchar(n % 10 + 48);
+	}
 }

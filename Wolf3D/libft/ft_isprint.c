@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/11/24 11:30:45 by rluder            #+#    #+#             */
+/*   Updated: 2015/12/03 18:57:14 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isprint(int c)
 {
-	t_m	m;
-
-	if (argc != 2)
-	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
-	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
+	if (c <= 126 && c >= 32)
+		return (1);
 	else
-		ft_putendl("Map is shitty");
-	return (0);
+		return (0);
 }

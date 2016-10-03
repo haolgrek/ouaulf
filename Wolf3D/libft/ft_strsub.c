@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/12/01 15:25:16 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/18 18:57:42 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	t_m	m;
+	char			*dst;
+	unsigned int	i;
 
-	if (argc != 2)
+	i = 0;
+	if (start > ft_strlen(s))
+		return (NULL);
+	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (NULL);
+	while (i < len)
 	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
+		dst[i] = (s) ? s[start + i] : '\0';
+		i++;
 	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
-	else
-		ft_putendl("Map is shitty");
-	return (0);
+	dst[i] = '\0';
+	return (dst);
 }

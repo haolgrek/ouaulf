@@ -1,51 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf.h                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:15:58 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:52:38 by rluder           ###   ########.fr       */
+/*   Created: 2015/12/09 17:11:33 by rluder            #+#    #+#             */
+/*   Updated: 2016/03/09 19:55:44 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF_H
-# define WOLF_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include "libft/libft.h"
+# include <unistd.h>
+# include <fcntl.h>
 # include <stdlib.h>
-# include <mlx.h>
-# include <math.h>
+# define BUFF_SIZE 8
 
-typedef struct		s_map
+typedef struct	s_file
 {
-	char			*line;
-	char			**spline;
-	struct s_map	*next;
-}					t_map;
+	char		*data;
+	int			fd;
+}				t_file;
 
-typedef struct	s_m
-{
-	int		xsize;
-	int		ysize;
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		*intab;
-	int		**btab;
-	int		bits;
-	int		size;
-	int		endian;
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	double	hit;
-	double	vm;
-}			t_m;
-
-t_m	init_m(t_m m);
-
+int				get_buff(int fd, char **data);
+int				get_next_line(const int fd, char **line);
 #endif

@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/11/28 20:14:34 by rluder            #+#    #+#             */
+/*   Updated: 2015/12/04 20:02:07 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+char	*ft_strnew(size_t size)
 {
-	t_m	m;
+	char	*str;
+	size_t	i;
 
-	if (argc != 2)
-	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
-	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
-	else
-		ft_putendl("Map is shitty");
-	return (0);
+	i = 0;
+	str = (char*)malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (NULL);
+	while (i < size)
+		str[i++] = '\0';
+	str[i] = '\0';
+	return (str);
 }

@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/12/01 15:28:06 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/18 17:37:52 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_m	m;
+	char	*dst;
+	size_t	i;
 
-	if (argc != 2)
-	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
-	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
-	else
-		ft_putendl("Map is shitty");
-	return (0);
+	i = 0;
+	if (s1 != NULL)
+		i += ft_strlen(s1);
+	if (s2 != NULL)
+		i += ft_strlen(s2);
+	dst = ft_memalloc(sizeof(char) * (i + 1));
+	if (!dst)
+		return (NULL);
+	if (s1 != NULL)
+		ft_strcpy(dst, s1);
+	if (s2 != NULL)
+		ft_strcat(dst, s2);
+	return (dst);
 }

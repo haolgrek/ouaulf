@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2015/11/24 12:04:05 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/18 18:37:03 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	t_m	m;
+	size_t	i;
+	size_t	len;
 
-	if (argc != 2)
+	i = 0;
+	len = ft_strlen(s1);
+	while (s2[i] != '\0')
 	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
+		s1[len + i] = s2[i];
+		i++;
 	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
-	else
-		ft_putendl("Map is shitty");
-	return (0);
+	s1[len + i] = '\0';
+	return (s1);
 }

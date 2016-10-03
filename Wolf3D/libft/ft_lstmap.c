@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 20:12:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/03 14:22:01 by rluder           ###   ########.fr       */
+/*   Created: 2016/01/22 11:52:03 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/22 11:52:08 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_m	m;
+	t_list	*lst2;
+	t_list	*tmp;
 
-	if (argc != 2)
+	if (!lst)
+		return (NULL);
+	if ((lst2 = ft_lstnew(lst->content, lst->content_size)) == NULL)
+		return (NULL);
+	lst2 = (f)(lst);
+	tmp = lst2;
+	while (lst->next != NULL)
 	{
-		ft_putendl("Wrong number of arguments");
-		return (0);
+		lst2->next = (f)(lst->next);
+		lst = lst->next;
+		lst2 = lst2->next;
 	}
-	else if (lvlok(argv[1]))
-	{
-		m = loadmap(argv);
-		m = init_m(m);
-		play(m);
-		mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-		mlx_hook(m.win, 2, 1, keys, &m);
-		mlx_loop(m.mlx);
-	}
-	else
-		ft_putendl("Map is shitty");
-	return (0);
+	return (tmp);
 }
