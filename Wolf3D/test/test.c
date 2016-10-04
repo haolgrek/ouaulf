@@ -63,6 +63,14 @@ int main(int argc, char *argv[])
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
+	double	oldplanex;
+	double	olddirx;
+	double	oldplaney;
+	double	olddiry;
+	double	frametime;
+	double	movespeed;
+	double	rotspeed;
+	int		x;
 
 	w= 1280;
 	h = 1024;
@@ -79,7 +87,8 @@ int main(int argc, char *argv[])
 	tracing loop start;
 	while (!done())
 	{
-		for(int x = 0; x < w; x++)
+		x = 0;
+		while (x < w)
 		{
 			//calculate ray position and direction
 			camerax = 2 * x / (double)w - 1; //x-coordinate in camera space
@@ -166,6 +175,7 @@ int main(int argc, char *argv[])
 			if (side == 1) {color = color / 2;}
 			//draw the pixels of the stripe as a vertical line
 			verline(x, drawstart, drawend, color);
+			x++;
 		}
 		//timing for input and FPS counter
 		
@@ -174,9 +184,9 @@ int main(int argc, char *argv[])
 	//  
 		time = getTicks();
 	//  
-		double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
+		frametime = (time - oldtime) / 1000.0; //frameTime is the time this frame has taken, in seconds
 	//  
-		print(1.0 / frameTime); //FPS counter
+		print(1.0 / frametime); //FPS counter
 	//  
 		redraw();
 	//  
@@ -187,44 +197,50 @@ int main(int argc, char *argv[])
 	//
 	////speed modifiers
 	//
-	double movespeed = frameTime * 5.0; //the constant value is in squares/second
+		movespeed = frametime * 5.0; //the constant value is in squares/second
 	//
-	double rotspeed = frameTime * 3.0; //the constant value is in radians/second
+		rotspeed = frametime * 3.0; //the constant value is in radians/second
 	//
-	readKeys();
+		readKeys();
 	//move forward if no wall in front of you
 	//
-	if (keydown(SDLK_UP))
-	{
-		if(worldmap[(int)(posx + dirx * movespeed)][(int)posy] == false) posx += dirx * movespeed;
-		if(worldmap[(int)posx][(int)(posy + diry * movespeed)] == false) posy += diry * movespeed;
+		if (keydown(SDLK_UP))
+		{
+			if(worldmap[(int)(posx + dirx * movespeed)][(int)posy] == false)
+				posx += dirx * movespeed;
+			if(worldmap[(int)posx][(int)(posy + diry * movespeed)] == false)
+				posy += diry * movespeed;
+		}
+		//move backwards if no wall behind you
+		if (keydown(SDLK_DOWN))
+		{
+			if(worldmap[(int)(posx - dirx * movespeed)][(int)posy] == false)
+				posx -= dirx * movespeed;
+			if(worldmap[(int)posx][(int)(posy - diry * movespeed)] == false)
+				posy -= diry * movespeed;
+		}
+		//rotate to the right
+		if (keydown(SDLK_RIGHT))
+		{
+		//both camera direction and camera plane must be rotated
+			olddirx = dirx;
+			dirx = dirx * cos(-rotspeed) - diry * sin(-rotspeed);
+			diry = olddirx * sin(-rotspeed) + diry * cos(-rotspeed);
+			oldplanex = planex;
+			planex = planex * cos(-rotspeed) - planey * sin(-rotspeed);
+			planey = oldplanex * sin(-rotspeed) + planey * cos(-rotspeed);
+		}
+		//rotate to the left
+		if (keydown(SDLK_LEFT))
+		{
+		//both camera direction and camera plane must be rotated
+			olddirx = dirx;
+			dirx = dirx * cos(rotspeed) - diry * sin(rotspeed);
+			diry = olddirx * sin(rotspeed) + diry * cos(rotspeed);
+			oldplanex = planex;
+			planex = planex * cos(rotspeed) - planey * sin(rotspeed);
+			planey = oldplanex * sin(rotspeed) + planey * cos(rotspeed);
+		}
 	}
-	//move backwards if no wall behind you
-	if (keydown(SDLK_DOWN))
-	{
-		if(worldmap[(int)(posx - dirx * movespeed)][(int)posy] == false) posx -= dirx * movespeed;
-		if(worldmap[(int)posx][(int)(posy - diry * movespeed)] == false) posy -= diry * movespeed;
-	}
-	//rotate to the right
-	if (keydown(SDLK_RIGHT))
-	{
-	//both camera direction and camera plane must be rotated
-		double olddirx = dirx;
-		dirx = dirx * cos(-rotspeed) - diry * sin(-rotspeed);
-		diry = olddirx * sin(-rotspeed) + diry * cos(-rotspeed);
-		double oldplanex = planex;
-		planex = planex * cos(-rotspeed) - planey * sin(-rotspeed);
-		planey = oldplanex * sin(-rotspeed) + planey * cos(-rotspeed);
-	}
-	//rotate to the left
-	if (keydown(SDLK_LEFT))
-	{
-	//both camera direction and camera plane must be rotated
-		double olddirx = dirx;
-		dirx = dirx * cos(rotspeed) - diry * sin(rotspeed);
-		diry = olddirx * sin(rotspeed) + diry * cos(rotspeed);
-		double oldplanex = planex;
-		planex = planex * cos(rotspeed) - planey * sin(rotspeed);
-		planey = oldplanex * sin(rotspeed) + planey * cos(rotspeed);
-	}
+	loop end;
 }
