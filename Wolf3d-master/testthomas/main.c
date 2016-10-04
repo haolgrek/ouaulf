@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 16:31:45 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/10/04 17:39:17 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/04 21:19:30 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,100 @@ int				main(int argc, char **argv)
 				return (st);
 			}
 			st = res_part3(st);
+			t_stres_part3(t_st st):
+				t_st	res_part3(t_st st)
+			{
+				st.drawstart = -st.lineheight		 / 2 + st.h / 2;
+				if (st.drawstart < 0)
+					st.drawstart = 0;
+				st.drawend = st.lineheight / 2 + st.h / 2;
+				if (st.drawend >= st.h)
+					st.drawend = st.h;
+				if (st.side == 1)
+					st.wallx = st.rayposx + ((st.mapy - st.rayposy + (1 - st.stepy) / 2) /
+							st.raydiry) * st.raydirx;
+				else
+					st.wallx = st.rayposy + ((st.mapx - st.rayposx + (1 - st.stepx) / 2) /
+							st.raydirx) * st.raydiry;
+				st.wallx -= floor((st.wallx));
+				st.texx = (int)(st.wallx * 64);
+				if (st.side == 0 && st.raydirx > 0)
+					st.texx = 64 - st.texx - 1;
+				if (st.side == 1 && st.raydiry < 0)
+					st.texx = 64 - st.texx - 1;
+				return (st);
+			}
+
 			y = st.drawstart;
+
 			st = res_part4(st, y, color, x);
 			st = res_part5(st);
+			t_st	res_part4(t_st st, int y, int color, int x)
+			{
+				while (y < st.drawend)
+				{
+					st.texy = (y * 2 - st.h + st.lineheight) * (64 / 2) / st.lineheight;
+					if (st.map[st.mapx][st.mapy] == 1)
+						color = st.text1tab[64 * st.texy + st.texx];
+					else if (st.map[st.mapx][st.mapy] == 2)
+						color = st.text2tab[64 * st.texy + st.texx];
+					else if (st.map[st.mapx][st.mapy] == 3)
+						color = st.text3tab[64 * st.texy + st.texx];
+					st.btab[y][x] = color;
+					y++;
+				}
+				return (st);
+			}
+			t_st	res_part5(t_st st)
+			{
+				if (st.side == 0 && st.raydirx > 0)
+				{
+					st.floorxwall = st.mapx;
+					st.floorywall = st.mapy + st.wallx;
+				}
+				else if (st.side == 0 && st.raydirx < 0)
+				{
+					st.floorxwall = st.mapx + 1.0;
+					st.floorywall = st.mapy + st.wallx;
+				}
+				else if (st.side == 1 && st.raydiry > 0)
+				{
+					st.floorxwall = st.mapx + st.wallx;
+					st.floorywall = st.mapy;
+				}
+				else
+				{
+					st.floorxwall = st.mapx + st.wallx;
+					st.floorywall = st.mapy + 1.0;
+				}
+				st.distwall = st.perpwalldist;
+				st.distplayer = 0.0;
+				return (st);
+			}
 			st = resp_part6(st, y, x);
+			t_stresp_part6(t_st st, int y, int x)
+			{
+				if (st.drawend < 0)
+					st.		drawend = st.h;
+				y = st.drawend;
+				while (y < st.h)
+				{
+					st.currentdist = st.h / (2.0 * y - st.h);
+					st.weight = (st.currentdist - st.distplayer) /
+						(st.distwall - st.distplayer);
+					st.currentfloorx = st.weight * st.floorxwall +
+						(1.0 - st.weight) * st.posx;
+					st.currentfloory = st.weight * st.floorywall +
+						(1.0 - st.weight) * st.posy;
+					st.floortexx = (int)(st.currentfloorx * 64) % 64;
+					st.floortexy = (int)(st.currentfloory * 64) % 64;
+					st.btab[y][x] = st.textsoltab[64 * st.floortexy + st.floortexx];
+					st.btab[st.h - y][x] = st.textplaftab[64 *
+						st.floortexy + st.floortexx];
+					y++;
+				}
+				return (st);
+			}
 			x++;
 		}
 		mlx_put_image_to_window(st.mlx, st.win, st.link, 0, 0);
