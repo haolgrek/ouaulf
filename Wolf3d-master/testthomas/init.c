@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 12:08:35 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/03 16:38:02 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 19:57:25 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,5 @@ t_st	init(t_st st)
 	st.planey = 1;
 	st.hit = 0;
 	st.vm = 0.2;
-	st.fustate = 1;
-	st.akstate = 1;
-	st.kfstate = 1;
-	st.ostate = 0;
-	st = read_jpg(st);
 	return (st);
 }

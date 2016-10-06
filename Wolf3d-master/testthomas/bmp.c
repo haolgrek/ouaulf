@@ -6,12 +6,12 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:59:07 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/04 11:36:43 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 18:57:57 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
+/*
 t_st	read_jpg2(t_st st, int lon, int lar)
 {
 	st.text3tab = (int*)mlx_get_data_addr(st.text3, &st.testbits,
@@ -58,4 +58,4 @@ t_st	read_jpg(t_st st)
 			&lon);
 	st = read_jpg2(st, lon, lar);
 	return (st);
-}
+}*/

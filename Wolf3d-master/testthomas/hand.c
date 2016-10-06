@@ -6,12 +6,12 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 10:36:45 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/02 19:46:21 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 18:57:32 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
+/*
 void	fu_display(t_st *st)
 {
 	int		y;
@@ -98,4 +98,4 @@ void	akfeu(t_st *st)
 			y++;
 		}
 	}
-}
+}*/

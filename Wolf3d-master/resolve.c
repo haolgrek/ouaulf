@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:22:18 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/04 12:06:49 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 17:48:59 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ void		resolve(t_st st)
 		st = res_part3(st);
 		y = st.drawstart;
 		st = res_part4(st, y, color, x);
-		st = res_part5(st);
-		st = resp_part6(st, y, x);
+		//st = res_part5(st);
+		//st = resp_part6(st, y, x);
 		x++;
 	}
 	if (st.kfstate == 0)

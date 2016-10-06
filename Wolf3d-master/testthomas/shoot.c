@@ -6,12 +6,12 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:43:26 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/03 18:04:17 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 19:04:53 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./wolf3d.h"
-
+/*
 void	shoot(t_st *st)
 {
 	if (st->fustate == 1 && st->kfstate == 1)
@@ -51,4 +51,4 @@ void	run_and_walk(int keycode, t_st *st)
 	}
 	else
 		st->vm = 0.2;
-}
+}*/

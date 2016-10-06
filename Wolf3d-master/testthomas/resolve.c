@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:22:18 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/04 12:06:49 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 19:07:00 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_st		init_st(t_st st, int x)
 	st.hit = 0;
 	return (st);
 }
-
+/*
 t_st		res_part1(t_st st)
 {
 	if (st.raydirx < 0)
@@ -135,4 +135,4 @@ void		resolve(t_st st)
 		fu_display(&st);
 	if (st.akstate == 0)
 		ak_display(&st);
-}
+}*/

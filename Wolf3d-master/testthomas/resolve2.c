@@ -6,12 +6,12 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:47:12 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/10/04 19:30:38 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/06 19:06:38 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./wolf3d.h"
-
+/*
 t_st		res_part3(t_st st)
 {
 	st.drawstart = -st.lineheight / 2 + st.h / 2;
@@ -77,4 +77,4 @@ t_st		res_part5(t_st st)
 	st.distwall = st.perpwalldist;
 	st.distplayer = 0.0;
 	return (st);
-}
+}*/

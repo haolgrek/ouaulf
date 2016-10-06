@@ -6,12 +6,12 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 15:35:24 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/03/03 18:09:11 by tandrieu         ###   ########.fr       */
+/*   Updated: 2016/10/06 18:55:32 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
+/*
 t_st	swin_part1(t_st st)
 {
 	mlx_string_put(st.mlx, st.win, 200, 25, 0xffffff, "SHIFT : Increase speed");
@@ -67,4 +67,4 @@ t_st	init_swin(t_st st)
 		mlx_put_image_to_window(st.mlx, st.win, st.link, 0, 0);
 	}
 	return (st);
-}
+}*/

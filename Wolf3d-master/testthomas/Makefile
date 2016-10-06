@@ -6,14 +6,13 @@
 #    By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/17 11:18:19 by tandrieu          #+#    #+#              #
-#    Updated: 2016/03/03 15:44:51 by tandrieu         ###   ########.fr        #
+#    Updated: 2016/10/06 19:54:33 by rluder           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 CFLAGS = -Wall -Werror -Wextra
-SRC = init.c main.c autre.c get_next_line.c create_map.c resolve.c hook.c  \
-	  bmp.c hand.c shoot.c resolve2.c music.c s_win.c
+SRC = init.c main.c autre.c get_next_line.c create_map.c resolve2.c hook.c
 
 OBJ = $(SRC:.c=.o)
 mlx = minilibx_macos

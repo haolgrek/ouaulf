@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
 	double	movespeed;
 	double	rotspeed;
 	int		x;
+	int		color;
 
 	w= 1280;
 	h = 1024;
@@ -83,9 +84,7 @@ int main(int argc, char *argv[])
 	time = 0; //time of current frame
 	oldtime = 0; //time of previous frame
 
-	set screen;
-	tracing loop start;
-	while (!done())
+	while (1)
 	{
 		x = 0;
 		while (x < w)
@@ -159,48 +158,22 @@ int main(int argc, char *argv[])
 				drawstart = 0;
 			drawend = lineheight / 2 + h / 2;
 			if(drawend >= h)
-				drawend = h - 1;
+				drawend = h;
 			//choose wall color
-			ColorRGB color;
-			switch(worldmap[mapx][mapx])
+			while (mapy < drawend)
 			{
-				case 1:  color = RGB_Red;  break; //red
-				case 2:  color = RGB_Green;  break; //green
-				case 3:  color = RGB_Blue;   break; //blue
-				case 4:  color = RGB_White;  break; //white
-				default: color = RGB_Yellow; break; //yellow
+				color = 0x00ff00;
+				if (side == 0)
+					color = 0x00f0f0;
+				if (side == 1 && raydiry < 0)
+					color = 0xff0000;
+				if (side == 0 && raydirx > 0)
+					color = 0x0000ff;
+				worldmap[mapy][mapx] = color;
+				mapy++;
 			}
-			
-			//give x and y sides different brightness
-			if (side == 1) {color = color / 2;}
-			//draw the pixels of the stripe as a vertical line
-			verline(x, drawstart, drawend, color);
-			x++;
 		}
-		//timing for input and FPS counter
-		
-		
-		oldtime = time;
-	//  
-		time = getTicks();
-	//  
-		frametime = (time - oldtime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-	//  
-		print(1.0 / frametime); //FPS counter
-	//  
-		redraw();
-	//  
-		cls();
-	//
-	//
-	//
-	//
-	////speed modifiers
-	//
-		movespeed = frametime * 5.0; //the constant value is in squares/second
-	//
-		rotspeed = frametime * 3.0; //the constant value is in radians/second
-	//
+		x++;
 		readKeys();
 	//move forward if no wall in front of you
 	//
