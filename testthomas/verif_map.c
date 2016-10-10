@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 17:28:03 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 18:43:02 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/10 20:59:06 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_map			*ft_create_elem(char *line)
 	map = malloc(sizeof(t_map));
 	if (map)
 	{
-		map->chartab = line;
+		map->chartab = ft_strdup(line);
 		map->intab = malloc(sizeof(int) * j);
 		map->next = NULL;
 	}
@@ -49,7 +49,7 @@ int				ft_mapok(char *str)
 	int		i;
 
 	i = 0;
-	if (('1' < str[i] || str[i] < '0') && str[i] != '-')
+	if (('1' < str[i] || str[i] < '0'))
 	{
 		intel_print(2);
 		return (0);
@@ -65,6 +65,7 @@ int				check(char *str)
 
 	fd = open(str, O_RDONLY);
 	ret = get_next_line(fd, &line);
+	ft_memdel((void**)&line);
 	close(fd);
 	return (ret);
 }

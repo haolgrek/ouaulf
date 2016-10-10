@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:06:57 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 18:30:46 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/10 19:46:08 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		key_hook(int keycode, t_st *st)
 {
 	if (keycode == 53)
 	{
-		free_all(st);
+//		free_all(st);
 		exit(0);
 	}
 	if (keycode == 13 || keycode == 1)

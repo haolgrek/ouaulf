@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:10:28 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 18:05:55 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/10 20:59:19 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void			resolve(t_st r)
 int				main(int argc, char **argv)
 {
 	t_st	r;
-	
+
 	if (argc != 2)
 		intel_print(1);
 	else if (check(argv[1]) == 1)

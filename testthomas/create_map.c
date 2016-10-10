@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 15:39:42 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 18:57:13 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/10 20:40:04 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_st			fill_tab(int **tab, t_map *list, int i, int k)
 	n = 0;
 	m = 0;
 	x = 0;
+	ft_bzero(&s, sizeof(t_st));
 	while (x < k)
 	{
 		y = 0;
@@ -92,7 +93,10 @@ t_st			create_chain(char **argv)
 	map1 = NULL;
 	v[0] = open(argv[1], O_RDONLY);
 	while (get_next_line(v[0], &line) != 0)
+	{
 		map1 = ft_list_insert_back(map1, line);
+		ft_memdel((void**)&line);
+	}
 	map2 = map1;
 	while (map1)
 	{
@@ -105,7 +109,6 @@ t_st			create_chain(char **argv)
 			map1->intab[v[1]] = ft_atoi(map1->tab_split[v[1]]);
 			v[1]++;
 		}
-//		ft_memdel((void**)&map1->chartab);
 		map1 = map1->next;
 	}
 	return (tabulatoire(map2, v[1]));
