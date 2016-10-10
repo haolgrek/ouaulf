@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rluder <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/02/17 11:18:19 by tandrieu          #+#    #+#              #
-#    Updated: 2016/10/06 19:54:33 by rluder           ###   ########.fr        #
+#    Created: 2016/10/10 15:24:24 by rluder            #+#    #+#              #
+#    Updated: 2016/10/10 17:41:03 by rluder           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 CFLAGS = -Wall -Werror -Wextra
-SRC = init.c main.c autre.c get_next_line.c create_map.c resolve2.c hook.c
-
+SRC = init.c main.c verif_map.c get_next_line.c create_map.c hook.c
 OBJ = $(SRC:.c=.o)
 mlx = minilibx_macos
 lft = libft

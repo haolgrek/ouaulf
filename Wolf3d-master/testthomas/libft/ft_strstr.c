@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/21 16:18:51 by tandrieu          #+#    #+#             */
-/*   Updated: 2015/12/21 16:18:53 by tandrieu         ###   ########.fr       */
+/*   Created: 2015/11/24 17:03:10 by rluder            #+#    #+#             */
+/*   Updated: 2015/12/03 19:12:00 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,19 @@
 
 char	*ft_strstr(const char *s1, const char *s2)
 {
-	int		i;
-	int		j;
+	char	*s11;
+	size_t	i;
 
-	i = 0;
-	j = 0;
-	if (s2[i] == '\0')
+	i = ft_strlen(s2);
+	s11 = (char*)s1;
+	if (*s2 == '\0')
 		return ((char*)s1);
-	while (s1[i] != '\0')
+	while (*s11 != '\0')
 	{
-		if (s2[j] == '\0')
-			return ((char*)&s1[i]);
-		if (s1[i + j] == s2[j])
-			j++;
+		if (ft_strncmp((const char*)s11, s2, i) == 0)
+			return (s11);
 		else
-		{
-			j = 0;
-			i++;
-		}
+			s11++;
 	}
-	return (0);
+	return (NULL);
 }

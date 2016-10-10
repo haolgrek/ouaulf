@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 17:31:13 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/10/06 19:04:26 by rluder           ###   ########.fr       */
+/*   Created: 2016/10/10 16:06:57 by rluder            #+#    #+#             */
+/*   Updated: 2016/10/10 18:30:46 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,18 @@ void	rotate(int keycode, t_st *st)
 	mlx_put_image_to_window(st->mlx, st->win, st->link, 0, 0);
 }
 
+void	free_all(t_st *st)
+{
+	ft_memdel((void**)&st->tab);
+	ft_memdel((void**)&st->btab);
+	ft_memdel((void**)&st->map);
+}
+
 int		key_hook(int keycode, t_st *st)
 {
 	if (keycode == 53)
 	{
-		system("killall afplay");
+		free_all(st);
 		exit(0);
 	}
 	if (keycode == 13 || keycode == 1)

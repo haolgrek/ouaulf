@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/21 16:12:07 by tandrieu          #+#    #+#             */
-/*   Updated: 2015/12/21 16:12:09 by tandrieu         ###   ########.fr       */
+/*   Created: 2015/11/25 18:27:25 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/18 18:21:36 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t		i;
-	char		*str;
+	size_t	i;
+	char	*str;
 
 	i = 0;
 	str = (char*)s;

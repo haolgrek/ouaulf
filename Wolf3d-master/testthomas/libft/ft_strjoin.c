@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaindro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 18:33:49 by amaindro          #+#    #+#             */
-/*   Updated: 2016/01/11 22:00:40 by amaindro         ###   ########.fr       */
+/*   Created: 2015/12/01 15:28:06 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/18 17:37:52 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s3;
-	size_t	len;
+	char	*dst;
+	size_t	i;
 
-	len = 0;
+	i = 0;
 	if (s1 != NULL)
-		len += ft_strlen(s1);
+		i += ft_strlen(s1);
 	if (s2 != NULL)
-		len += ft_strlen(s2);
-	s3 = ft_memalloc(sizeof(char) * (len + 1));
-	if (!s3)
+		i += ft_strlen(s2);
+	dst = ft_memalloc(sizeof(char) * (i + 1));
+	if (!dst)
 		return (NULL);
 	if (s1 != NULL)
-		ft_strcpy(s3, s1);
+		ft_strcpy(dst, s1);
 	if (s2 != NULL)
-		ft_strcat(s3, s2);
-	return (s3);
+		ft_strcat(dst, s2);
+	return (dst);
 }

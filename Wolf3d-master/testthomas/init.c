@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/17 12:08:35 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/10/06 19:57:25 by rluder           ###   ########.fr       */
+/*   Created: 2016/10/10 16:09:51 by rluder            #+#    #+#             */
+/*   Updated: 2016/10/10 17:55:18 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_st	init(t_st st)
 	st.link = mlx_new_image(st.mlx, st.w, st.h);
 	st.tab = (int*)mlx_get_data_addr(st.link, &st.bits, &st.size, &st.endian);
 	st.btab = ft_create_btab(st);
-	st.posx = 3;
-	st.posy = 3;
+	st.posx = 4;
+	st.posy = 4;
 	st.dirx = -1;
 	st.diry = 0;
 	st.planex = 0;

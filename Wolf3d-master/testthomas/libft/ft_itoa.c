@@ -3,58 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/21 16:13:07 by tandrieu          #+#    #+#             */
-/*   Updated: 2015/12/21 16:13:11 by tandrieu         ###   ########.fr       */
+/*   Created: 2015/12/01 16:07:25 by rluder            #+#    #+#             */
+/*   Updated: 2016/01/22 15:04:01 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int	ft_len(int n)
+static int		ft_size(int n)
 {
-	int		i;
+	int size;
 
-	i = 0;
+	size = 0;
 	if (n == 0)
 		return (1);
 	if (n < 0)
-		i++;
+		size++;
 	while (n != 0)
 	{
-		n /= 10;
-		i++;
+		n = n / 10;
+		size++;
 	}
-	return (i);
+	return (size);
 }
 
-char		*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
-	char	*str;
-	int		signe;
-	int		i;
-	int		len;
+	char	*dst;
+	int		sign;
+	int		size;
 
-	signe = 1;
-	len = ft_len(n);
-	str = (char*)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
+	sign = (n < 0) ? -1 : 1;
+	size = ft_size(n);
+	dst = malloc(sizeof(dst) * (size + 1));
 	if (n == 0)
-		str[0] = '0';
-	if (n < 0)
+		dst[0] = '0';
+	if (!dst)
+		return (NULL);
+	dst[size--] = '\0';
+	while ((size + 1) > 0)
 	{
-		str[0] = '-';
-		signe = -1;
-	}
-	i = len - 1;
-	while (n != 0)
-	{
-		str[i--] = (n % 10) * signe + '0';
+		dst[size--] = (n % 10) * sign + 48;
 		n = n / 10;
 	}
-	str[len] = '\0';
-	return (str);
+	if (sign == -1)
+		dst[0] = '-';
+	return (dst);
 }

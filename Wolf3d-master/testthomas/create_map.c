@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/17 14:33:39 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/02/25 10:19:52 by tandrieu         ###   ########.fr       */
+/*   Created: 2016/10/10 15:39:42 by rluder            #+#    #+#             */
+/*   Updated: 2016/10/10 18:57:13 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_poire			*ft_list_insert_back(t_poire *walter_white, char *line)
+t_map			*ft_list_insert_back(t_map *map, char *line)
 {
-	t_poire	*tmp;
-	t_poire	*tmp2;
+	t_map	*tmp;
+	t_map	*tmp2;
 
 	tmp = ft_create_elem(line);
 	if (tmp)
 	{
-		if (walter_white)
+		if (map)
 		{
-			tmp2 = walter_white;
+			tmp2 = map;
 			while (tmp2->next)
 				tmp2 = tmp2->next;
 			tmp2->next = tmp;
 		}
 		else
-			walter_white = tmp;
+			map = tmp;
 	}
-	return (walter_white);
+	return (map);
 }
 
-t_st			fill_tab(int **tab, t_poire *list, int i, int k)
+t_st			fill_tab(int **tab, t_map *list, int i, int k)
 {
 	int			x;
 	int			y;
 	int			n;
 	int			m;
-	t_st		tinky_winky;
+	t_st		s;
 
 	n = 0;
 	m = 0;
@@ -49,66 +49,66 @@ t_st			fill_tab(int **tab, t_poire *list, int i, int k)
 		y = 0;
 		while (y < i)
 		{
-			tab[x][y] = list->arrow_sucks[y];
+			tab[x][y] = list->intab[y];
 			y++;
 		}
 		list = list->next;
 		x++;
 	}
-	tinky_winky.map_width = i;
-	tinky_winky.map_height = k;
-	tinky_winky.map = tab;
-	return (tinky_winky);
+	s.map_width = i;
+	s.map_height = k;
+	s.map = tab;
+	return (s);
 }
 
-t_st			tabulatoire(t_poire *rob_stark_mother, int i)
+t_st			tabulatoire(t_map *map, int i)
 {
 	int		**tab;
 	int		j;
 	int		k;
-	t_poire	*begin;
+	t_map	*begin;
 
 	j = 0;
 	k = 0;
-	begin = rob_stark_mother;
-	while (rob_stark_mother)
+	begin = map;
+	while (map)
 	{
-		rob_stark_mother = rob_stark_mother->next;
+		map = map->next;
 		k++;
 	}
 	tab = malloc(sizeof(int*) * k);
 	while (j < k)
-		tab[j++] = malloc(sizeof(int) * i);
+		tab[j++] = malloc(sizeof(int) * (i - 1));
 	return (fill_tab(tab, begin, i, k));
 }
 
-t_st			han_shot_first(char **argv)
+t_st			create_chain(char **argv)
 {
 	char	*line;
-	t_poire	*jon_snow;
-	t_poire	*rob_stark_wife;
+	t_map	*map1;
+	t_map	*map2;
 	int		v[2];
 
-	jon_snow = NULL;
+	map1 = NULL;
 	v[0] = open(argv[1], O_RDONLY);
 	while (get_next_line(v[0], &line) != 0)
-		jon_snow = ft_list_insert_back(jon_snow, line);
-	rob_stark_wife = jon_snow;
-	while (jon_snow)
+		map1 = ft_list_insert_back(map1, line);
+	map2 = map1;
+	while (map1)
 	{
 		v[1] = 0;
-		jon_snow->tab_split = ft_strsplit(jon_snow->twilight_sucks, ' ');
-		while (jon_snow->tab_split[v[1]] != '\0')
+		map1->tab_split = ft_strsplit(map1->chartab, ' ');
+		while (map1->tab_split[v[1]] != '\0')
 		{
-			if (ft_isok(jon_snow->tab_split[v[1]]) == 0)
+			if (ft_mapok(map1->tab_split[v[1]]) == 0)
 				exit(0);
-			jon_snow->arrow_sucks[v[1]] = ft_atoi(jon_snow->tab_split[v[1]]);
+			map1->intab[v[1]] = ft_atoi(map1->tab_split[v[1]]);
 			v[1]++;
 		}
-		ft_memdel((void**)&jon_snow->twilight_sucks);
-		jon_snow = jon_snow->next;
+//		ft_memdel((void**)&map1->chartab);
+		map1 = map1->next;
 	}
-	return (tabulatoire(rob_stark_wife, v[1]));
+	return (tabulatoire(map2, v[1]));
 }
 
 void			empty_btab(t_st st)
