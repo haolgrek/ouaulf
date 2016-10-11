@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 17:28:03 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 20:59:06 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/11 23:17:59 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_map			*ft_create_elem(char *line)
 	if (map)
 	{
 		map->chartab = ft_strdup(line);
-		map->intab = malloc(sizeof(int) * j);
+		map->intab = malloc(sizeof(int) * (j / 2 + 1));
 		map->next = NULL;
 	}
 	return (map);
