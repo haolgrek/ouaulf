@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   testtab.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/10 16:09:51 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/13 21:09:29 by rluder           ###   ########.fr       */
+/*   Created: 2016/10/13 14:47:49 by rluder            #+#    #+#             */
+/*   Updated: 2016/10/13 20:37:59 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_st	init(t_st st)
+char		**create_map(char	*argv)
 {
-	st.w = 1280;
-	st.h = 720;
-	st.mlx = mlx_init();
-	st.win = mlx_new_window(st.mlx, st.w, st.h, "wolf3d");
-	st.link = mlx_new_image(st.mlx, st.w, st.h);
-	st.tab = (int*)mlx_get_data_addr(st.link, &st.bits, &st.size, &st.endian);
-	st.btab = ft_create_btab(st);
-	st.posx = 4;
-	st.posy = 4;
-	st.dirx = -1;
-	st.diry = 0;
-	st.planex = 0;
-	st.planey = 1;
-	st.hit = 0;
-	st.vm = 0.2;
-	return (st);
+	int		i;
+	int		fd;
+	char	*line;
+	char	**tab;
+
+	i = 0;
+	line = NULL;
+	fd = open(argv, O_RDONLY);
+	while(get_next_line(fd, &line))
+		i++;
+	ft_memdel((void**)&line);
+	close(fd);
+	tab = malloc(sizeof(char*) * (i + 1));
+	i = 0;
+	fd = open(argv, O_RDONLY);
+	while(get_next_line(fd, &line))
+	{
+		tab[i] = ft_strdup(line);
+		ft_memdel((void**)&line);
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
+

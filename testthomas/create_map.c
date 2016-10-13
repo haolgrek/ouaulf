@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 15:39:42 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/12 00:04:24 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/13 21:42:45 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_st			fill_tab(int **tab, t_map *list, int i, int k)
 	}
 	s.map_width = i;
 	s.map_height = k;
-	s.map = tab;
+//	s.map = tab;
 	return (s);
 }
 
@@ -83,9 +83,146 @@ t_st			tabulatoire(t_map *map, int i)
 	return (fill_tab(tab, begin, i, k));
 }
 
-t_st			create_chain(char **argv)
+char		**create_chain(char	*argv, t_st r)
 {
+	int		i;
+	int		j;
+	int		fd;
 	char	*line;
+	char	**tab;
+
+	i = 0;
+	j = 0;
+	line = NULL;
+	fd = open(argv, O_RDONLY);
+	while(get_next_line(fd, &line))
+		i++;
+	r.map_height = i;
+	ft_memdel((void**)&line);
+	close(fd);
+	tab = malloc(sizeof(char*) * (i + 1));
+	i = 0;
+	fd = open(argv, O_RDONLY);
+	while(get_next_line(fd, &line))
+	{
+		tab[j] = ft_strdup(line);
+		ft_memdel((void**)&line);
+		j++;
+	}
+	tab[j] = NULL;
+	r.map_width = j;
+	return (tab);
+}
+
+int			**intab(t_st r)
+{
+	int	i;
+	int	**intab;
+
+	i = 0;
+	intab = malloc(sizeof(int*) * r.h);
+	while (i < r.h)
+	{
+		intab[i] = &r.tab[i * r.h];
+		i++;
+	}
+	intab[i] = NULL;
+	return (intab);
+}
+
+/*int			**create_chain(char **argv, t_st r)
+{
+	int		fd;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	char	*line;
+	int		**intab;
+
+	ft_putendl("start");
+	i = 0;
+	j = 0;
+	line = NULL;
+	fd = open(argv[1], O_RDONLY);
+	ft_putendl("open");
+	while (get_next_line(fd, &line) != 0)
+		i++;
+	ft_memdel((void**)&line);
+	r.map_height = i / 2;
+	ft_putendl("ivalue");
+	close(fd);
+	ft_putendl("close");
+	intab = ft_memalloc(sizeof(int*) * (i + 1));
+	ft_putendl("memallocintab");
+	line = NULL;
+	fd = open(argv[1], O_RDONLY);
+	ft_putendl("open2");
+	while (get_next_line(fd, &line) != 0)
+	{
+		k = 0;
+		l = 0;
+		ft_putendl("inwhile");
+		ft_putstr("line is ");
+		ft_putendl(line);
+		i = ft_strlen(line);
+		intab[j] = ft_memalloc(sizeof(int) * i);
+		while(line[k])
+		{
+			if (line[k] == '1')
+			{
+				intab[j][l] = 1;
+				k++;
+				l++;
+			}
+			else if (line[k] == '0')
+			{
+				intab[j][l] = 0;
+				k++;
+				l++;
+			}
+			else if (line[k] == ' ')
+			{
+				k++;
+			}
+//			else if (line[k] != '\0')
+//			{
+//				ft_putendl("map is nope");
+//				exit (0);
+//			}
+		}
+		ft_putendl("endcalc");
+		ft_memdel((void**)&line);
+		j++;
+	}
+	r.map_width = i;
+	ft_putendl("endwhile");
+	intab[j] = NULL;
+	ft_putendl("endintabnull");
+	i = 0;
+	j = 0;
+	while (intab[j] != NULL)
+	{
+		i = 0;
+		while (i < r.map_width)
+		{
+			ft_putnbr(intab[j][i]);
+			i++;
+		}
+		j++;
+		ft_putchar('\n');
+	}
+	ft_putendl("endcreate");
+	return (intab);
+}
+
+	
+//	tab[j] = ft_atoi(ft_strsplit(ft_strdup(line), ' '));
+//		ft_memdel((void**)&line);
+//	}
+//	tab[j] = NULL;*/
+
+/*	char	*line;
 	t_map	*map1;
 	t_map	*map2;
 	int		v[2];
@@ -111,8 +248,8 @@ t_st			create_chain(char **argv)
 		}
 		map1 = map1->next;
 	}
-	return (tabulatoire(map2, v[1]));
-}
+	return (tabulatoire(map2, v[1]));*/
+//}
 
 void			empty_btab(t_st st)
 {

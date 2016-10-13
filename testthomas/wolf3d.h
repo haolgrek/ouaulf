@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:13:13 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 18:30:25 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/13 23:27:43 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct		s_st
 	int				h;
 	int				map_width;
 	int				map_height;
-	int				**map;
+	char			**map;
 	double			posx;
 	double			posy;
 	double			dirx;
@@ -86,11 +86,12 @@ t_map				*ft_create_elem(char *line);
 int					ft_mapok(char *str);
 int					check(char *str);
 void				intel_print(int i);
-t_st				create_chain(char **argv);
-void				resolve(t_st st);
+char				**create_chain(char *argv, t_st r);
+t_st				resolve(t_st st);
 int					**ft_create_btab(t_st list);
 int					key_hook(int keycode, t_st *st);
 void				empty_btab(t_st st);
 void				free_all(t_st *st);
+int					**intab(t_st r);
 
 #endif

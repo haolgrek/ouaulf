@@ -6,22 +6,61 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:10:28 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/10 20:59:19 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/14 00:03:06 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void			resolve(t_st r)
+void			printparams(t_st r)
+{
+	ft_putstr("w: ");
+	ft_putnbr(r.w);
+	ft_putchar('\n');
+	ft_putstr("h: ");
+	ft_putnbr(r.h);
+	ft_putchar('\n');
+	ft_putstr("map_width: ");
+	ft_putnbr(r.map_width);
+	ft_putchar('\n');
+	ft_putstr("map_height: ");
+	ft_putnbr(r.map_height);
+	ft_putchar('\n');
+	ft_putstr("mapx: ");
+	ft_putnbr(r.mapx);
+	ft_putchar('\n');
+	ft_putstr("mapy: ");
+	ft_putnbr(r.mapy);
+	ft_putchar('\n');
+	ft_putstr("stepx: ");
+	ft_putnbr(r.stepx);
+	ft_putchar('\n');
+	ft_putstr("stepy: ");
+	ft_putnbr(r.stepy);
+	ft_putchar('\n');
+	ft_putstr("hit: ");
+	ft_putnbr(r.hit);
+	ft_putchar('\n');
+	ft_putstr("side: ");
+	ft_putnbr(r.side);
+	ft_putchar('\n');
+	ft_putstr("lineheight: ");
+	ft_putnbr(r.lineheight);
+	ft_putchar('\n');
+}
+
+t_st			resolve(t_st r)
 {
 	int	x;
 	int	y;
 	double	color;
 
+//	ft_putendl("resstart");
 	x = 0;
 	y = 0;
 	while (x < r.w)
 	{
+//		ft_putendl("while1");
 		r.camerax = 2 * x / (double)r.w - 1;
 		r.rayposx = r.posx;
 		r.rayposy = r.posy;
@@ -34,9 +73,11 @@ void			resolve(t_st r)
 		r.deltadisty = sqrt(1 + (r.raydirx * r.raydirx) /
 				(r.raydiry * r.raydiry));
 		r.hit = 0;
+//		ft_putendl("beforeif");
 		if (r.raydirx < 0)
 		{
 			r.stepx = -1;
+//			ft_putendl("inif");
 			r.sidedistx = (r.rayposx - r.mapx) * r.deltadistx;
 		}
 		else
@@ -47,6 +88,7 @@ void			resolve(t_st r)
 		if (r.raydiry < 0)
 		{
 			r.stepy = -1;
+//			ft_putendl("inif2");
 			r.sidedisty = (r.rayposy - r.mapy) * r.deltadisty;
 		}
 		else
@@ -56,6 +98,7 @@ void			resolve(t_st r)
 		}
 		while (r.hit == 0)
 		{
+//			ft_putendl("while2");
 			if (r.sidedistx < r.sidedisty)
 			{
 				r.sidedistx += r.deltadistx;
@@ -99,19 +142,32 @@ void			resolve(t_st r)
 		}
 		x++;
 	}
+	return (r);
 }
 
 int				main(int argc, char **argv)
 {
 	t_st	r;
 
+	r.w = 1280;
+	r.h = 768;
+	ft_putendl("pseudo-init");
 	if (argc != 2)
 		intel_print(1);
 	else if (check(argv[1]) == 1)
 	{
-		r = create_chain(argv);
+		r.mlx = mlx_init();
+		r.win = mlx_new_window(r.mlx, r.h, r.w, "");
+		r.link = mlx_new_image(r.mlx, r.h, r.w);
 		r = init(r);
-		resolve(r);
+		ft_putendl("init");
+		r.map = create_chain(argv[1], r);
+		r.tab = (int*)mlx_get_data_addr(r.link, &r.bits, &r.size, &r.endian);
+		r.btab = intab(r);
+		ft_putendl("createchain");
+		r = resolve(r);
+		ft_putendl("resolve");
+		printparams(r);
 		mlx_put_image_to_window(r.mlx, r.win, r.link, 0, 0);
 		mlx_hook(r.win, 2, 1, key_hook, &r);
 		mlx_loop(r.mlx);
