@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 14:07:32 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/14 17:01:04 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/14 23:44:12 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int			**tab_to_tab2d(t_mlx l)
 
 void		free_all(t_mlx *l)
 {
-//	ft_memdel((void**)&l->tex[0]);
-//	ft_memdel((void**)&l->tex[1]);
-//	ft_memdel((void**)&l->tex[2]);
-//	ft_memdel((void**)&l->tex[3]);
-//	ft_memdel((void**)&l->tex[4]);
-//	ft_memdel((void**)&l->tex[9]);
+	ft_memdel((void**)&l->tex[0]);
+	ft_memdel((void**)&l->tex[1]);
+	ft_memdel((void**)&l->tex[2]);
+	ft_memdel((void**)&l->tex[3]);
+	ft_memdel((void**)&l->tex[4]);
+	ft_memdel((void**)&l->tex[9]);
 	ft_memdel((void**)&l->map);
 	ft_memdel((void**)&l->tab);
 }
@@ -68,7 +68,7 @@ int		key_hook(		int keycode, t_mlx *l)
 {
 	if (keycode == 53)
 	{
-//		system("killall afplay");
+		system("killall afplay");
 		free_all(l);
 		exit(0);
 	}
@@ -81,12 +81,12 @@ int		key_hook(		int keycode, t_mlx *l)
 	mlx_clear_window(l->mlx, l->win);
 	*l = print_map(*l);
 	mlx_put_image_to_window(l->mlx, l->win, l->link, 0, 0);
-//	mlx_put_image_to_window(l->mlx, l->win, l->lb_link, 0, 0);
-//	mlx_string_put(l->mlx, l->win, 350, 15, 0xFFFFFF, l->s1 = ft_itoa(l->s[2]));
-//	mlx_string_put(l->mlx, l->win, 575, 15, 0xFFFFFF, l->s2 = ft_itoa(l->s[1]));
-//	mlx_string_put(l->mlx, l->win, 450, 15, 0xFFFFFF, l->s3 = ft_itoa(l->s[0]));
-//	mlx_string_put(l->mlx, l->win, 50, 15, 0xFFFFFF, "lvl");
-//	mlx_string_put(l->mlx, l->win, 100, 15, 0xFFFFFF, l->sl = ft_itoa(l->lvl));
+	mlx_put_image_to_window(l->mlx, l->win, l->lb_link, 0, 0);
+	mlx_string_put(l->mlx, l->win, 350, 15, 0xFFFFFF, l->s1 = ft_itoa(l->s[2]));
+	mlx_string_put(l->mlx, l->win, 575, 15, 0xFFFFFF, l->s2 = ft_itoa(l->s[1]));
+	mlx_string_put(l->mlx, l->win, 450, 15, 0xFFFFFF, l->s3 = ft_itoa(l->s[0]));
+	mlx_string_put(l->mlx, l->win, 50, 15, 0xFFFFFF, "lvl");
+	mlx_string_put(l->mlx, l->win, 100, 15, 0xFFFFFF, l->sl = ft_itoa(l->lvl));
 	free_str(l);
 	return (0);
 }
@@ -96,9 +96,9 @@ int		main(void)
 {
 	t_mlx	l;
 
-	//	l.s[0] = 0;
-	//	l.s[1] = 0;
-	//	l.s[2] = 0;
+	l.s[0] = 0;
+	l.s[1] = 0;
+	l.s[2] = 0;
 	l.lvl = 1;
 	l.mlx = mlx_init();
 	l.win = mlx_new_window(l.mlx, 1000, 1000, "Wolf");
@@ -115,7 +115,7 @@ int		main(void)
 	l = print_map(create_tex(l));
 	mlx_hook(l.win, 2, 1, key_hook, &l);
 	mlx_put_image_to_window(l.mlx, l.win, l.link, 0, 0);
-//	mlx_put_image_to_window(l.mlx, l.win, l.lb_link, 0, 0);
+	mlx_put_image_to_window(l.mlx, l.win, l.lb_link, 0, 0);
 	mlx_loop(l.mlx);
 	return (0);
 }
