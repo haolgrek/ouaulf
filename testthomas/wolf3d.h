@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:13:13 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/13 23:27:43 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/14 16:02:28 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void				intel_print(int i);
 char				**create_chain(char *argv, t_st r);
 t_st				resolve(t_st st);
 int					**ft_create_btab(t_st list);
-int					key_hook(int keycode, t_st *st);
+int					key_hook(int keycode, t_st st);
 void				empty_btab(t_st st);
 void				free_all(t_st *st);
 int					**intab(t_st r);

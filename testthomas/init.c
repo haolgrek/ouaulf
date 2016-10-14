@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:09:51 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/13 21:09:29 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/14 13:56:03 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_st	init(t_st st)
 	st.win = mlx_new_window(st.mlx, st.w, st.h, "wolf3d");
 	st.link = mlx_new_image(st.mlx, st.w, st.h);
 	st.tab = (int*)mlx_get_data_addr(st.link, &st.bits, &st.size, &st.endian);
-	st.btab = ft_create_btab(st);
+//	st.btab = ft_create_btab(st);
 	st.posx = 4;
 	st.posy = 4;
 	st.dirx = -1;

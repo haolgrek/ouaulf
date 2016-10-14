@@ -6,13 +6,13 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 15:39:42 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/13 21:42:45 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:25:29 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_map			*ft_list_insert_back(t_map *map, char *line)
+/*t_map			*ft_list_insert_back(t_map *map, char *line)
 {
 	t_map	*tmp;
 	t_map	*tmp2;
@@ -81,7 +81,7 @@ t_st			tabulatoire(t_map *map, int i)
 	while (j < k)
 		tab[j++] = malloc(sizeof(int) * (i - 1));
 	return (fill_tab(tab, begin, i, k));
-}
+}*/
 
 char		**create_chain(char	*argv, t_st r)
 {
@@ -97,7 +97,7 @@ char		**create_chain(char	*argv, t_st r)
 	fd = open(argv, O_RDONLY);
 	while(get_next_line(fd, &line))
 		i++;
-	r.map_height = i;
+	r.map_height = i - 1;
 	ft_memdel((void**)&line);
 	close(fd);
 	tab = malloc(sizeof(char*) * (i + 1));
@@ -110,7 +110,7 @@ char		**create_chain(char	*argv, t_st r)
 		j++;
 	}
 	tab[j] = NULL;
-	r.map_width = j;
+	r.map_width = j - 1;
 	return (tab);
 }
 
@@ -251,7 +251,7 @@ int			**intab(t_st r)
 	return (tabulatoire(map2, v[1]));*/
 //}
 
-void			empty_btab(t_st st)
+/*void			empty_btab(t_st st)
 {
 	int x;
 	int y;
@@ -267,4 +267,4 @@ void			empty_btab(t_st st)
 		}
 		y++;
 	}
-}
+}*/

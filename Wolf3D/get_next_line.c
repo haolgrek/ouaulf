@@ -6,12 +6,11 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 15:57:08 by rluder            #+#    #+#             */
-/*   Updated: 2016/03/09 19:52:38 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/18 18:56:02 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft/libft.h"
 
 int			get_buff(int fd, char **data)
 {

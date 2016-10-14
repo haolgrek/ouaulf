@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:10:28 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/14 00:03:06 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:22:16 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,19 +150,19 @@ int				main(int argc, char **argv)
 	t_st	r;
 
 	r.w = 1280;
-	r.h = 768;
+//	r.h = 720;
 	ft_putendl("pseudo-init");
 	if (argc != 2)
 		intel_print(1);
 	else if (check(argv[1]) == 1)
 	{
-		r.mlx = mlx_init();
-		r.win = mlx_new_window(r.mlx, r.h, r.w, "");
-		r.link = mlx_new_image(r.mlx, r.h, r.w);
-		r = init(r);
+//		r.mlx = mlx_init();
+//		r.win = mlx_new_window(r.mlx, r.h, r.w, "");
+//		r.link = mlx_new_image(r.mlx, r.h, r.w);
 		ft_putendl("init");
+		r = init(r);
 		r.map = create_chain(argv[1], r);
-		r.tab = (int*)mlx_get_data_addr(r.link, &r.bits, &r.size, &r.endian);
+//		r.tab = (int*)mlx_get_data_addr(r.link, &r.bits, &r.size, &r.endian);
 		r.btab = intab(r);
 		ft_putendl("createchain");
 		r = resolve(r);
