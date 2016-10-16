@@ -6,68 +6,16 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:49:40 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/14 16:51:29 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/16 22:36:17 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_mlx		*collect_x(t_mlx *l)
-{
-	char	ore;
-	int		i;
-
-	ore = l->map[(int)(l->pos_x + l->dir_x * l->d.move_speed)][(int)(l->pos_y)];
-	l->map[(int)(l->pos_x + l->dir_x * l->d.move_speed)][(int)(l->pos_y)] = '0';
-	l->s[ore - '3'] += 1;
-	if (l->s[2] == 1 && l->s[0] == 4 && l->s[1] == 9
-			&& l->lvl == 1)
-	{
-		l->lvl = 2;
-		l->pos_x = 2;
-		l->pos_y = 2;
-		i = 0;
-		while (l->map[i])
-			ft_memdel((void**)&l->map[i++]);
-		ft_memdel((void**)&l->map);
-		l->map = map_gen(l->lvl);
-	}
-	return (l);
-}
-
-t_mlx		*collect_y(t_mlx *l)
-{
-	char	ore;
-	int		i;
-
-	ore = l->map[(int)(l->pos_x)][(int)(l->pos_y + l->dir_y * l->d.move_speed)];
-	l->map[(int)(l->pos_x)][(int)(l->pos_y + l->dir_y * l->d.move_speed)] = '0';
-	l->s[ore - '3'] += 1;
-	if (l->s[2] == 1 && l->s[0] == 4 && l->s[1] == 9
-			&& l->lvl == 1)
-	{
-		l->lvl = 2;
-		l->pos_x = 2;
-		l->pos_y = 2;
-		i = 0;
-		while (l->map[i])
-			ft_memdel((void**)&l->map[i++]);
-		ft_memdel((void**)&l->map);
-		l->map = map_gen(l->lvl);
-	}
-	return (l);
-}
-
 t_mlx		*move_hook(int keycode, t_mlx *l)
 {
 	if (keycode == 13)
 	{
-		if (l->	map[(int)(l->pos_x + l->dir_x * l->d.move_speed)]
-				[(int)(l->pos_y)] > '2')
-			collect_x(l);
-		if (l->map[(int)(l->pos_x)][(int)(l->pos_y + l->dir_y *
-					l->d.move_speed)] > '2')
-			collect_y(l);
 		if (l->map[(int)(l->pos_x + l->dir_x * l->d.move_speed)]
 				[(int)(l->pos_y)] == '0')
 			l->pos_x += l->dir_x * l->d.move_speed;

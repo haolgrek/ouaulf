@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:11:33 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/14 16:46:12 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/16 22:37:23 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,20 @@ t_mlx		draw(int x, int height, t_mlx l, t_data d)
 	i = 0;
 	while (i < 1000)
 	{
-		l.tab2d[i][x] = (i < 500) ? 0x00BFFF : 0x4F4F4F;
+		l.tab2d[i][x] = (i < 500) ? 0x00AFFF : 0x5F5F5F;
 		i++;
 	}
 	i = 500 - height / 2;
 	i = (i < 0) ? 0 : i;
 	while (i < 500 + height / 2 && i < 1000)
 	{
-		d1 = i * 256 - 1000 * 128 + height * 128;
-		l.tex_y = ((d1 * 16) / height) / 256;
-		color = l.tex[d.hit - 1][16 * l.tex_y + l.tex_x];
-		if (d.side == 1)
-			color = (color >> 1) & 0x7F7F7F;
+		color = 0x00FF00;
+		if (d.side == 0)
+			color = 0x00F0F0;
+		if (d.side == 1 && d.raydir_y < 0)
+			color = 0x7F7F7F;
+		if (d.side == 0 && d.raydir_x > 0)
+			color = 0x0000FF;
 		l.tab2d[i++][x] = color;
 	}
 	return (l);
@@ -101,8 +103,6 @@ t_mlx		print_map(t_mlx l)
 		d = check_steps(d);
 		d = hit(d, l);
 		d = check_side(d, &l);
-		if ((d.side == 0 && d.raydir_x > 0) || (d.side == 1 && d.raydir_y < 0))
-			l.tex_x = 16 - l.tex_x - 1;
 		d.lineheight = (int)1000 / d.perpwalldist;
 		draw(d.x, d.lineheight, l, d);
 		d.x++;

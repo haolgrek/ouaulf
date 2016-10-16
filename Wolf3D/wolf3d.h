@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:03:37 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/14 16:10:35 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/16 22:01:00 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*win;
 	void		*link;
-	void		*lb_link;
+//	void		*lb_link;
 	void		*sky_link;
 	int			*tab;
 	int			**tab2d;

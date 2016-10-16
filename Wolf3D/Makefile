@@ -6,7 +6,7 @@
 #    By: rluder <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/14 16:58:42 by rluder            #+#    #+#              #
-#    Updated: 2016/10/14 16:59:19 by rluder           ###   ########.fr        #
+#    Updated: 2016/10/16 22:40:01 by rluder           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ SRC_NAME = main.c \
 		   solve2.c \
 		   get_next_line.c \
 		   hook.c \
-		   tex.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
