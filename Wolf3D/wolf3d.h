@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:03:37 by rluder            #+#    #+#             */
-/*   Updated: 2016/10/16 22:01:00 by rluder           ###   ########.fr       */
+/*   Updated: 2016/10/17 00:07:22 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*win;
 	void		*link;
-//	void		*lb_link;
-	void		*sky_link;
 	int			*tab;
 	int			**tab2d;
 	int			bits;
@@ -75,26 +73,16 @@ typedef struct	s_mlx
 	double		olddir_x;
 	double		oldplane_x;
 	t_data		d;
-	int			*tex[10];
-	int			tex_y;
-	int			tex_x;
-	double		wallx;
 	int			lvl;
 	int			s[3];
-	char		*s1;
-	char		*s2;
-	char		*s3;
-	char		*sl;
 }				t_mlx;
 
 char			**map_gen(int level);
 t_mlx			print_map(t_mlx l);
-t_mlx			create_tex(t_mlx l);
 t_mlx			*rot_hook_right(t_mlx *l);
 t_mlx			*move_hook(int keycode, t_mlx *l);
 t_mlx			*rot_hook_left(t_mlx *l);
 t_data			check_steps(t_data d);
 t_data			check_side(t_data d, t_mlx *l);
-void			free_str(t_mlx *l);
 
 #endif
